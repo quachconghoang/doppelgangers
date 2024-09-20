@@ -166,4 +166,5 @@ cython_debug/
 /train/
 /kaggle/
 /checkpoints/
+/weights/
 __pycache__
