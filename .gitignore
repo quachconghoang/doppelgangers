@@ -160,11 +160,14 @@ cython_debug/
 
 .idea/
 /build/
-/data/
+/data/doppelgangers_dataset/
+/data/sfm_disambiguation/
 /outputs/
 /models/
 /train/
 /kaggle/
 /checkpoints/
 /weights/
+/results/
+/logs/
 __pycache__
