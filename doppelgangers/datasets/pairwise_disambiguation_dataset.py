@@ -72,10 +72,15 @@ class DoppelgangersDataset(Dataset):
                 matches = np.array(np.ones((keypoints0.shape[0], 2)) * np.arange(keypoints0.shape[0]).reshape(-1,1)).astype(int)[conf>0.8][mask.ravel()==1]
 
         image = read_loftr_matches(img_name0, img_name1, self.img_size, 8, True, keypoints0, keypoints1, matches, warp=True, conf=conf)
-        
+
+        is_match = False
+        if matches is not None:
+            is_match = True
+
         data = {
             'image': image,  # (4, h, w)
-            'gt': int(label)
+            'gt': int(label),
+            'valid_match': is_match,
         }
 
         return data
