@@ -13,7 +13,7 @@ from shutil import copy2
 import cv2 as cv
 from pathlib import Path
 
-arg_conf = 'doppelgangers/configs/training_configs/doppelgangers_classifier_noflip.yaml'
+arg_conf = 'doppelgangers/configs/training_configs/doppelgangers_classifier_aliked_noflip.yaml'
 
 def dict2namespace(config):
     namespace = argparse.Namespace()
@@ -51,7 +51,6 @@ train_loader = loaders['train_loader']
 #%%
 from kornia.utils import tensor_to_image
 import numpy as np
-
 # get random sample from train_loader
 rng = np.random.default_rng()
 # get 100 samples

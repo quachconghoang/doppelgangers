@@ -64,8 +64,10 @@ def save_matches(ft0, ft1, matches, img0, img1, save_path, preview_path = None):
 
     m_kpts0, m_kpts1 = kpts0[matches[..., 0]], kpts1[matches[..., 1]]
     scores = scores.cpu().numpy()
+    kp0 = m_kpts0.cpu().numpy()
+    kp1 = m_kpts1.cpu().numpy()
     ### save to numpy pickle overwriting
-    np.save(save_path, {'kpt0': m_kpts0, 'kpt1': m_kpts1, 'conf': scores})
+    np.save(save_path, {'kpt0': kp0, 'kpt1': kp1, 'conf': scores})
 
     # random T/F for 1% True
     can_draw = np.random.choice([True, False], p=[0.01, 0.99])
@@ -81,6 +83,7 @@ def save_matches(ft0, ft1, matches, img0, img1, save_path, preview_path = None):
         kpc0, kpc1 = viz2d.cm_RdGn(scores), viz2d.cm_RdGn(scores)
         viz2d.plot_keypoints([m_kpts0, m_kpts1], colors=[kpc0, kpc1], ps=5)
         viz2d.save_plot(preview_path)
+        plt.close()
 
 #%%
 # db_type = 'train_set_noflip' # 'train_set_noflip', 'test_set'
@@ -103,8 +106,8 @@ if not (db_path/'aliked_1024_lg_matches'/db_type).exists():
     (db_path/'aliked_1024_lg_matches'/db_type).mkdir(parents=True)
 if not (db_path/'aliked_1024_lg_matches_preview'/db_type).exists():
     (db_path/'aliked_1024_lg_matches_preview'/db_type).mkdir(parents=True)
-for pair_ID in range(train_pairs.shape[0]):
-    print('processing pair:', pair_ID)
+for pair_ID in tqdm.tqdm(range(train_pairs.shape[0])):
+    # print('processing pair:', pair_ID)
     pair = train_pairs[pair_ID]
     img_root = db_path / 'images' / db_type
     image0, image1 = load_doppleganger_img(pair, db_path, db_type, size=1024)
@@ -138,6 +141,9 @@ for pair_ID in tqdm.tqdm(range(test_pairs.shape[0])):
     preview_path = db_path/'aliked_1024_lg_matches_preview'/db_type/f'{pair_ID}.png'
     save_matches(feats0, feats1, matches01, image0, image1, save_path, preview_path)
 
+
+# load loftr matches
+# pair_matches = np.load('./data/doppelgangers_dataset/doppelgangers/loftr_matches/train_set_noflip/0.npy', allow_pickle=True).item()
 
 # Load the DINOv2 model
 # dm = Dinov2FeatureExtractor(half_precision=False, device='cuda')
