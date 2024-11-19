@@ -2,14 +2,16 @@ data:
   type: doppelgangers.datasets.pairwise_disambiguation_dataset
   num_workers: 4  
   train:
-    image_dir: ['data/doppelgangers_dataset/doppelgangers/images/train_set_flip/']
-    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches/train_set_flip/']
+    image_dir: ['data/doppelgangers_dataset/doppelgangers/images/train_set_noflip/']
+#    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches/train_set_noflip/']
+    loftr_match_dir: [ 'data/doppelgangers_dataset/doppelgangers/aliked_1024_lg_matches/train_set_noflip/' ]
     batch_size: 8
     img_size: 1024
-    pair_path: ['data/doppelgangers_dataset/doppelgangers/pairs_metadata/train_pairs_flip.npy']
+    pair_path: ['data/doppelgangers_dataset/doppelgangers/pairs_metadata/train_pairs_noflip.npy']
   test:
     image_dir: ['data/doppelgangers_dataset/doppelgangers/images/test_set/']
-    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches/test_set/']
+#    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches/test_set/']
+    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/aliked_1024_lg_matches/test_set/']
     batch_size: 8
     img_size: 1024
     pair_path: ['data/doppelgangers_dataset/doppelgangers/pairs_metadata/test_pairs.npy']

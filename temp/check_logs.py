@@ -11,7 +11,7 @@ pred_list = logs['pred']
 prob_list = logs['prob']
 # compute precision
 precision = np.sum(gt_list == pred_list) / len(gt_list) # Precision = 0.88, AP = 0.95???
-# ap = compute_ap(gt_list, prob_list)
+ap = compute_ap(gt_list, prob_list)
 
 
 failed = logs['pred'] != logs['gt']

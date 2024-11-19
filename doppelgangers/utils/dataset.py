@@ -8,9 +8,13 @@ from PIL import Image, ImageOps
 
 def imread_rgb(path):
     cv_type = cv2.IMREAD_COLOR
-    if str(path).endswith('gif'):        
+    if str(path).endswith('gif'):
         pil_image = Image.open(str(path))
+        if(pil_image.mode == "P"):
+            pil_image = pil_image.convert("RGB")
         image = np.array(pil_image)
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+
     else:
         image = cv2.imread(str(path), cv_type)
 
