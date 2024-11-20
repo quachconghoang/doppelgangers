@@ -18,6 +18,10 @@ def imread_rgb(path):
     else:
         image = cv2.imread(str(path), cv_type)
 
+    # if len(image.shape)<3 or image.shape[2]<3:
+    #     print(f"Image {path} has less than 3 channels")
+    #     return None
+
     if len(image.shape)<3:
         image = image[:, :, np.newaxis]
     if image.shape[2]<3:

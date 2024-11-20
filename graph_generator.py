@@ -26,12 +26,13 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # 'mps', 
 extractor = ALIKED(max_num_keypoints=4096, detection_threshold=0.2, nms_radius=2).eval().to(device)  # load the extractor
 matcher = LightGlue(features='aliked',depth_confidence=-1, width_confidence=-1).eval().to(device)
 
-def load_doppleganger_img(pair, dataset_path, db_type, size=1024):
+def load_doppleganger_img(pair, dataset_path, db_type, size=None):
     img_root = dataset_path / 'images' / db_type
     img0 = imread_rgb(img_root / pair[0])
     img1 = imread_rgb(img_root / pair[1])
-    img0 = resize_image(img0, size=size)[0]
-    img1 = resize_image(img1, size=size)[0]
+    if size is not None:
+        img0 = resize_image(img0, size=size)[0]
+        img1 = resize_image(img1, size=size)[0]
     img0 = cv.cvtColor(img0, cv.COLOR_BGR2RGB)
     img1 = cv.cvtColor(img1, cv.COLOR_BGR2RGB)
     image0 = numpy_image_to_torch(img0)
@@ -131,8 +132,7 @@ for pair_ID in tqdm.tqdm(range(test_pairs.shape[0])):
     # print('processing pair:', pair_ID)
     pair = test_pairs[pair_ID]
     img_root = db_path / 'images' / db_type
-    image0 = numpy_image_to_torch(resize_image(imread_rgb(img_root / pair[0]), size=1024)[0])
-    image1 = numpy_image_to_torch(resize_image(imread_rgb(img_root / pair[1]), size=1024)[0])
+    image0, image1 = load_doppleganger_img(pair, db_path, db_type, size=1024)
     feats0 = extractor.extract(image0.to(device))
     feats1 = extractor.extract(image1.to(device))
     matches01 = matcher({'image0': feats0, 'image1': feats1})

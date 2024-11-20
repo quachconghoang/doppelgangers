@@ -4,15 +4,31 @@ import pathlib as path
 import kornia as K
 from kornia.utils import tensor_to_image
 from kornia.io import load_image
+
 import cv2 as cv
 import matplotlib.pyplot as plt
+
 import torch
 from pathlib import Path
 import pandas as pd
 
+from doppelgangers.utils.dataset import imread_rgb
+import tqdm
 
 db_path = path.Path('./data/doppelgangers_dataset/doppelgangers/')
 train_pairs = np.load(db_path/'pairs_metadata'/'train_pairs_noflip.npy', allow_pickle=True)
+test_pairs = np.load(db_path/'pairs_metadata'/'test_pairs.npy', allow_pickle=True)
+
+#%%
+for pair_id in tqdm.tqdm(range(test_pairs.shape[0])):
+    img0 = imread_rgb(db_path/'images'/'test_set'/test_pairs[pair_id][0])
+    img1 = imread_rgb(db_path/'images'/'test_set'/test_pairs[pair_id][1])
+
+#%%
+for pair_id in tqdm.tqdm(range(train_pairs.shape[0])):
+    img0 = imread_rgb(db_path/'images'/'train_set_noflip'/train_pairs[pair_id][0])
+    img1 = imread_rgb(db_path/'images'/'train_set_noflip'/train_pairs[pair_id][1])
+
 
 #%%
 image_paths = db_path/'images'/'train_set_noflip'
