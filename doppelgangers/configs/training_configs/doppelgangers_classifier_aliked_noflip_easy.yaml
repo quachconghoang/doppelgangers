@@ -3,13 +3,13 @@ data:
   num_workers: 8  
   train:
     image_dir: ['data/doppelgangers_dataset/doppelgangers/images/train_set_noflip/']
-    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches_easy/train_set_noflip/']
+    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/aliked_1024_lg_matches_easy/train_set_noflip/']
     batch_size: 8
     img_size: 1024
     pair_path: ['data/doppelgangers_dataset/doppelgangers/pairs_metadata/easy_train_pairs_noflip.npy']
   test:
     image_dir: ['data/doppelgangers_dataset/doppelgangers/images/test_set/']
-    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches_easy/test_set/']
+    loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/aliked_1024_lg_matches_easy/test_set/']
     batch_size: 8
     img_size: 1024
     pair_path: ['data/doppelgangers_dataset/doppelgangers/pairs_metadata/easy_test_pairs.npy']
