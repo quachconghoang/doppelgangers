@@ -13,7 +13,7 @@ import cv2 as cv
 from lightglue import LightGlue, SuperPoint, ALIKED, match_pair
 from lightglue.utils import rbd, numpy_image_to_torch,resize_image
 from lightglue import viz2d
-# from doppelgangers.models.dinov2 import Dinov2FeatureExtractor
+from doppelgangers.models.dinov2 import Dinov2FeatureExtractor
 from doppelgangers.utils.dataset import imread_rgb
 
 torch.set_grad_enabled(False)
@@ -146,8 +146,8 @@ for pair_ID in tqdm.tqdm(range(test_pairs.shape[0])):
 # pair_matches = np.load('./data/doppelgangers_dataset/doppelgangers/loftr_matches/train_set_noflip/0.npy', allow_pickle=True).item()
 
 # Load the DINOv2 model
-# dm = Dinov2FeatureExtractor(half_precision=False, device='cuda')
-# ft_dino_0, grid_0 = dm.extract_features(image0)
+dm = Dinov2FeatureExtractor(half_precision=False, device='cuda')
+ft_dino_0, grid_0 = dm.extract_features(image0)
 # ft_dino_1, grid_1 = dm.extract_features(image1)
 # vis1 = dm.get_embedding_visualization(ft_dino_0, grid_0)
 # vis2 = dm.get_embedding_visualization(ft_dino_1, grid_1)
