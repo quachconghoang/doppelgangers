@@ -1,6 +1,6 @@
 data:
   type: doppelgangers.datasets.pairwise_disambiguation_dataset
-  num_workers: 8  
+  num_workers: 4
   train:
     image_dir: ['data/doppelgangers_dataset/doppelgangers/images/train_set_noflip/']
     loftr_match_dir: ['data/doppelgangers_dataset/doppelgangers/loftr_matches_easy/train_set_noflip/']

@@ -18,6 +18,7 @@ models:
   decoder:
     type: doppelgangers.models.cnn_classifier
     input_dim: 10
+    aligntment: False
 
 trainer:
   type: trainers.doppelgangers_trainer
